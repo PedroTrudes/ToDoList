@@ -19,8 +19,17 @@ export default function Home() {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View>
-                <Text>Lista</Text>
+            <View style={styles.containerList}>
+                <View style={styles.containerItens}>
+                    <View style={styles.item}>
+                        <Text style={{color: "#4EA8DE"}} >Criadas</Text>
+                        <Text style={styles.itemNumber}>0</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Text style={{color: "#8284FA"}}>Concluidas</Text>
+                        <Text style={styles.itemNumber}>0</Text>
+                    </View>
+                </View>
             </View>
         </View>
     )

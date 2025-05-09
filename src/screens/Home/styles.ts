@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
     containerHome: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#000',
         paddingTop: 55,
         alignItems: 'center',
     },
@@ -15,12 +15,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     containerForm: {
-        position: 'relative',       
+        position: 'relative',    
+        backgroundColor: '#191919',  
+        width: '100%' 
     },
     form: {
         alignItems: 'center',
         flexDirection: 'row',
         top: -25,
+        left: 40
     },
     formInput: {
         width: 275,
@@ -39,12 +42,30 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 56,
         height: 56
-        //paddingTop: 11,
-        //paddingBottom: 11,
-        //paddingLeft: 14,
-        //paddingRight: 14
     },
     containerList:{
-        
+        backgroundColor: '#191919',
+        flex: 1,
+        width: '100%'
+    },
+    containerItens: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 40,
+        paddingRight: 40
+    },
+    item: {
+        flexDirection: 'row',
+    },
+    
+    itemNumber: {
+        marginLeft: 5,
+        paddingTop: 2,
+        paddingBottom: 2,
+        paddingLeft: 6,
+        paddingRight: 6,
+        backgroundColor: '#333333',
+        borderRadius: 18,
+        color: '#D9D9D9'
     }
 })
