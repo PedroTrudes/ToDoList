@@ -1,5 +1,6 @@
 import { Text, TextInput, TouchableOpacity, View, Image } from "react-native";
 import { styles } from './styles'
+import { Card } from "../components/Card";
 
 export default function Home() {
     return(
@@ -30,7 +31,15 @@ export default function Home() {
                         <Text style={styles.itemNumber}>0</Text>
                     </View>
                 </View>
+                <View>
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                </View>
             </View>
+
         </View>
     )
 }
