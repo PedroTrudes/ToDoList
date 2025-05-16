@@ -1,8 +1,29 @@
-import { Text, TextInput, TouchableOpacity, View, Image } from "react-native";
+import { Text, TextInput, TouchableOpacity, View, Image, FlatList, Alert } from "react-native";
 import { styles } from './styles'
 import { Card } from "../components/Card";
+import { useState } from "react";
 
 export default function Home() {
+    const [listTask, setListTask] = useState<string[]>([]);
+    const [task, setTask] = useState('');
+
+    function deleteItemList(itemList: string) {
+        Alert.alert('Remover', 'Remover item da lista?', [
+            {
+                text: 'Sim',
+                onPress: () => {
+                    Alert.alert('Deletado com sucesso')
+                    setListTask(prev => prev.filter
+                        (item => item !== itemList));
+                }
+            },
+            {
+                text: 'Não',
+                style: 'cancel'
+            }
+        ])
+    }
+
     return(
         <View style={styles.containerHome}>
             <View style={styles.containerImage}>
@@ -24,20 +45,37 @@ export default function Home() {
                 <View style={styles.containerItens}>
                     <View style={styles.item}>
                         <Text style={{color: "#4EA8DE"}} >Criadas</Text>
-                        <Text style={styles.itemNumber}>0</Text>
+                        <Text style={styles.itemNumber}>{listTask.length}</Text>
                     </View>
                     <View style={styles.item}>
                         <Text style={{color: "#8284FA"}}>Concluidas</Text>
                         <Text style={styles.itemNumber}>0</Text>
                     </View>
                 </View>
-                <View>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                </View>
+                <FlatList 
+                data={listTask}
+                keyExtractor={item => item}
+                renderItem={({item}) => (
+                    <Card 
+                    key={item}
+                    taskName={item}
+                    removeTask={() => deleteItemList(item)}
+                    />
+                )}
+                ListEmptyComponent={() => (
+                    <View style={styles.containerListEmpty}> 
+                        <View style={styles.divider}> </View>
+                        <Image source={require('../../../assets/icons/Clipboard.png')}/>
+                        <Text style={styles.listEmptyTextPrimary}>
+                            Você ainda não tem tarefas cadastradas
+                        </Text>
+                        <Text style={styles.listEmptyTextSecundary}>
+                            Crie tarefas e organize seus itens a fazer
+                        </Text>
+                    </View>
+                )}
+                />
+
             </View>
 
         </View>

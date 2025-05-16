@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
         borderColor: '#5E60CE'
     },
     cardText: {
-        maxWidth: screenSize * 0.7,
+        maxWidth: screenSize * 0.9,
         color: '#F2F2F2',
         fontSize: 17
     },

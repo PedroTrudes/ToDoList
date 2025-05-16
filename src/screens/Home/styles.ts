@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+import { Dimensions } from 'react-native';
+
+const screenSize = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
     containerHome: {
@@ -67,5 +70,27 @@ export const styles = StyleSheet.create({
         backgroundColor: '#333333',
         borderRadius: 18,
         color: '#D9D9D9'
+    },
+    containerListEmpty:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    divider: {
+        marginTop: 23,
+        marginBottom: 32,
+        borderWidth: 1,
+        borderBlockColor: '#333333',
+        width: screenSize * 0.8,
+    },
+    listEmptyTextPrimary: {
+        marginTop: 32,
+        fontSize: 17,
+        fontWeight: 'bold',
+        color: "#808080"
+    },
+    listEmptyTextSecundary: {
+        fontSize: 16,
+        color: "#808080"
     }
 })
