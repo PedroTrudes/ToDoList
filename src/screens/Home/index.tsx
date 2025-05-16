@@ -6,8 +6,22 @@ import { useState } from "react";
 export default function Home() {
     const [listTask, setListTask] = useState<string[]>([]);
     const [task, setTask] = useState('');
+    const [taskDone, setTaskDone] = useState<number>(0);
 
-    function deleteItemList(itemList: string) {
+    if(taskDone < 0){
+        setTaskDone(0);
+    }
+
+    function addItemList(){
+        if(listTask.includes(task)){
+            return Alert.alert('Task ja registrada')
+        }
+
+        setListTask(prev => [...prev, task]);
+        setTask('');
+    }
+
+    function deleteItemList(itemList: string, isChecked: boolean) {
         Alert.alert('Remover', 'Remover item da lista?', [
             {
                 text: 'Sim',
@@ -15,6 +29,10 @@ export default function Home() {
                     Alert.alert('Deletado com sucesso')
                     setListTask(prev => prev.filter
                         (item => item !== itemList));
+
+                        if(isChecked == true){
+                            setTaskDone(prev => prev - 1)
+                        }
                 }
             },
             {
@@ -35,8 +53,12 @@ export default function Home() {
                     style={styles.formInput} 
                     placeholder="Adicione uma nova tarefa"
                     placeholderTextColor="#808080"
+                    onChangeText={text => setTask(text)}
+                    value={task}
                     />
-                    <TouchableOpacity style={styles.formButton}>
+                    <TouchableOpacity style={styles.formButton}
+                    onPress={addItemList}
+                    >
                         <Image source={require('../../../assets/icons/plus.png')} />
                     </TouchableOpacity>
                 </View>
@@ -49,7 +71,7 @@ export default function Home() {
                     </View>
                     <View style={styles.item}>
                         <Text style={{color: "#8284FA"}}>Concluidas</Text>
-                        <Text style={styles.itemNumber}>0</Text>
+                        <Text style={styles.itemNumber}>{taskDone}</Text>
                     </View>
                 </View>
                 <FlatList 
@@ -59,13 +81,15 @@ export default function Home() {
                     <Card 
                     key={item}
                     taskName={item}
-                    removeTask={() => deleteItemList(item)}
+                    removeTask={(isChecked) => deleteItemList(item, isChecked)}
+                    taskDoneCheck={setTaskDone}
                     />
                 )}
                 ListEmptyComponent={() => (
                     <View style={styles.containerListEmpty}> 
-                        <View style={styles.divider}> </View>
+                        <View style={styles.divider}></View>
                         <Image source={require('../../../assets/icons/Clipboard.png')}/>
+
                         <Text style={styles.listEmptyTextPrimary}>
                             Você ainda não tem tarefas cadastradas
                         </Text>
@@ -75,7 +99,6 @@ export default function Home() {
                     </View>
                 )}
                 />
-
             </View>
 
         </View>
