@@ -7,6 +7,15 @@ export default function Home() {
     const [listTask, setListTask] = useState<string[]>([]);
     const [task, setTask] = useState('');
 
+    function addItemList(){
+        if(listTask.includes(task)){
+            return Alert.alert('Task ja registrada')
+        }
+
+        setListTask(prev => [...prev, task]);
+        setTask('');
+    }
+
     function deleteItemList(itemList: string) {
         Alert.alert('Remover', 'Remover item da lista?', [
             {
@@ -35,8 +44,12 @@ export default function Home() {
                     style={styles.formInput} 
                     placeholder="Adicione uma nova tarefa"
                     placeholderTextColor="#808080"
+                    onChangeText={text => setTask(text)}
+                    value={task}
                     />
-                    <TouchableOpacity style={styles.formButton}>
+                    <TouchableOpacity style={styles.formButton}
+                    onPress={addItemList}
+                    >
                         <Image source={require('../../../assets/icons/plus.png')} />
                     </TouchableOpacity>
                 </View>
@@ -75,7 +88,6 @@ export default function Home() {
                     </View>
                 )}
                 />
-
             </View>
 
         </View>
