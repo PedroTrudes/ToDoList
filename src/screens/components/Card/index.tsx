@@ -5,14 +5,21 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
     taskName: string,
-    removeTask: () => void;
+    taskDoneCheck: React.Dispatch<React.SetStateAction<number>>;
+    removeTask: (isChecked: boolean) => void;
 }
 
-export function Card({taskName, removeTask}: Props) {
+export function Card({taskName, taskDoneCheck, removeTask}: Props) {
     const [isSelected, setSelection] = useState(false);
 
 
     const toggleCheckbox = () => {
+        if(!isSelected){
+            taskDoneCheck(prev => prev + 1);
+        }else{
+            taskDoneCheck(prev => prev - 1);
+        }
+
         setSelection(!isSelected);
     };
 
@@ -25,7 +32,7 @@ export function Card({taskName, removeTask}: Props) {
                 </View>
             </TouchableOpacity>
             <Text style={[styles.cardText, isSelected && styles.cardTextChecked]}>{taskName}</Text>
-            <TouchableOpacity onPress={removeTask}>
+            <TouchableOpacity onPress={() => removeTask(isSelected)}>
                 <MaterialIcons name="delete" size={23} color="#808080" />
             </TouchableOpacity>
         </View>

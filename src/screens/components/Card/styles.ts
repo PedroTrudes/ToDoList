@@ -8,12 +8,13 @@ export const styles = StyleSheet.create({
         backgroundColor: '#333333',
         flexDirection: 'row',
         margin: 4,
-        height: 'auto',
+        minHeight: 50,
         boxSizing: 'border-box',
         padding: 16,
         borderRadius: 4,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignSelf: 'stretch'
     },
     checkbox: {
         width: 24,
@@ -30,9 +31,13 @@ export const styles = StyleSheet.create({
         borderColor: '#5E60CE'
     },
     cardText: {
-        maxWidth: screenSize * 0.9,
+        minWidth: screenSize * 0.7,
+        maxWidth: screenSize * 0.7,
         color: '#F2F2F2',
-        fontSize: 17
+        fontSize: 17,
+        flexWrap: 'wrap',
+        paddingLeft: 14,
+        paddingRight: 14
     },
     cardTextChecked: {
         textDecorationLine: 'line-through',
